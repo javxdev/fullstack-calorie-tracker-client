@@ -1,12 +1,10 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react"
-import { v4 as uuidv4 } from 'uuid'
+import { useState, ChangeEvent, FormEvent } from "react"
 import { Activity } from "../types"
 import { categories } from "../data/categories"
 import useActivity from "../hooks/useActivity"
 
 
 const initialState: Activity = {
-    id: uuidv4(),
     category: 1,
     name: '',
     calories: 0
@@ -15,16 +13,6 @@ const initialState: Activity = {
 export default function Form() {
     const { state, dispatch } = useActivity()
     const [activity, setActivity] = useState<Activity>(initialState)
-
-    useEffect(() => {
-        if(state.activeId){
-            const selectedActivity = state.activities.filter(
-                stateActivity => stateActivity.id === state.activeId)[0]
-            setActivity(selectedActivity)
-        }
-
-    }, [state.activeId])
-
     
     const handleChange = (e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id)
@@ -44,9 +32,12 @@ export default function Form() {
         e.preventDefault()
         
         dispatch({type: 'save-activity', payload: {newActivity: activity}})
+
         setActivity({
             ...initialState,
-            id: uuidv4()
+            category: 1,
+            name: '',
+            calories: 0
         })
     }
     
