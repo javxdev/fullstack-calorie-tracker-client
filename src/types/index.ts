@@ -11,4 +11,6 @@ export const ActivitySchema = z.object({
     calories: z.number()
 })
 
+export const ActivitiesSchema = z.array(ActivitySchema)
+
 export type Activity = z.infer<typeof ActivitySchema>
