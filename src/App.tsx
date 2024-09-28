@@ -3,10 +3,27 @@ import Form from "./components/Form";
 import ActivityList from "./components/ActivityList";
 import CalorieTracker from "./components/CalorieTracker";
 import useActivity from "./hooks/useActivity";
+import { getActivities } from "./services/ActivityService";
+import { Activity } from "./types";
 
 function App() {
 
   const { state, dispatch } = useActivity()
+
+  useEffect(() => {
+    async function fetchActivities() {
+      try {
+        const activities = await getActivities() as Activity[];
+        dispatch({type: "fetch-activities", payload: { activities }})
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+      }
+    }
+
+    fetchActivities();
+  }, []);
+
+  console.log(state)
 
   useEffect(() => {
     localStorage.setItem('activities', JSON.stringify(state.activities))

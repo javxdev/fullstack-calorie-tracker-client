@@ -42,14 +42,14 @@ export default function ActivityList() {
             <button>
               <PencilSquareIcon
                 className="size-10 text-gray-800"
-                onClick={() => dispatch({ type: 'set-activeId', payload: {id: activity.id} })}
+                // onClick={() => dispatch({ type: 'set-activeId', payload: {id: activity.id} })}
               />
             </button>
 
             <button>
               <XCircleIcon
                 className="size-10 text-red-500"
-                onClick={() => dispatch({ type: 'delete-activity', payload: {id: activity.id} })}
+                // onClick={() => dispatch({ type: 'delete-activity', payload: {id: activity.id} })}
               />
             </button>
           </div>

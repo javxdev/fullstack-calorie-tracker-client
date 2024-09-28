@@ -6,6 +6,7 @@ export type Category = {
 }
 
 export const ActivitySchema = z.object({
+    id: z.number(),
     category: z.number(),
     name: z.string(),
     calories: z.number()

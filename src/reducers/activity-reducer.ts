@@ -1,7 +1,7 @@
 import { Activity } from "../types"
 
 export type ActivityActions =
-    { type: 'save-activity', payload: { activities: Activity[] } } |
+    { type: 'fetch-activities', payload: { activities: Activity[] } } |
     { type: 'restart-app' } 
 
 
@@ -19,10 +19,10 @@ export const activityReducer = (
         action: ActivityActions 
     ) => {
     
-    if(action.type === 'save-activity') {
+    if(action.type === 'fetch-activities') {
         return {
             ...state,
-            activities: action.payload
+            activities: action.payload.activities
         }
     }
 
