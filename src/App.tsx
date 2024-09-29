@@ -19,7 +19,7 @@ function App() {
     
   return (
     <>
-      <header className="py-8 bg-green-600">
+      <header className="py-8 bg-gray-800">
         <div className="max-w-3xl mx-auto flex justify-between items-center">
           <h1 className="text-white uppercase font-bold text-2xl">Calorie Tracker</h1>
           <button 
@@ -31,7 +31,7 @@ function App() {
         </div>
       </header>
 
-      <section className="bg-green-400">
+      <section className="bg-gray-700">
         <div className="max-w-3xl mx-auto py-20">
           <Form/>
         </div>
@@ -43,7 +43,7 @@ function App() {
           </div>
       </section>
 
-      <section className="mx-auto p-10">
+      <section className="mx-auto bg-gray-200 p-10">
         <div className=" mx-auto max-w-3xl">
           <ActivityList/>
         </div>
