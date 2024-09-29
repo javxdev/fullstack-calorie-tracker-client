@@ -24,3 +24,13 @@ export const addActivity = async (data: Activity) => {
         throw error;
     }
 };
+
+
+export const deleteActivity = async (id: Activity['id']) => {
+    try {
+        const result = await axios.delete(`${import.meta.env.VITE_API_URL}/api/activities/${id}`);
+        console.log(result)
+    } catch (error) {
+        throw error;
+    }
+};

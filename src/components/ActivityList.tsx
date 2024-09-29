@@ -3,6 +3,7 @@ import { categories } from "../data/categories"
 import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import useActivity from "../hooks/useActivity"
+import { deleteActivity } from "../services/ActivityService"
 
 export default function ActivityList() {
 
@@ -42,14 +43,18 @@ export default function ActivityList() {
             <button>
               <PencilSquareIcon
                 className="size-10 text-gray-800"
-                onClick={() => dispatch({ type: 'set-activeId', payload: {id: activity.id} })}
+                // onClick={() => dispatch({ type: 'set-activeId', payload: {id: activity.id} })}
               />
             </button>
 
             <button>
               <XCircleIcon
                 className="size-10 text-red-500"
-                // onClick={() => dispatch({ type: 'delete-activity', payload: {id: activity.id} })}
+                onClick={async () => {
+                  await deleteActivity(activity.id);
+                  dispatch({ type: 'delete-activity', payload: { id: activity.id } });
+                }}
+              
               />
             </button>
           </div>
