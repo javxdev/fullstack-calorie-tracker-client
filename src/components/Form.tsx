@@ -5,13 +5,14 @@ import useActivity from "../hooks/useActivity"
 
 
 const initialState: Activity = {
+    id: 0,
     category: 1,
     name: '',
     calories: 0
 }
 
 export default function Form() {
-    const { state, dispatch } = useActivity()
+    // const { state, dispatch } = useActivity()
     const [activity, setActivity] = useState<Activity>(initialState)
     
     const handleChange = (e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +32,7 @@ export default function Form() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         
-        dispatch({type: 'save-activity', payload: {newActivity: activity}})
+        // dispatch({type: 'save-activity', payload: {newActivity: activity}})
 
         setActivity({
             ...initialState,
