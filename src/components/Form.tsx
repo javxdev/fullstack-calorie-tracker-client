@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react"
 import { Activity } from "../types"
 import { categories } from "../data/categories"
-import { addActivity } from "../services/ActivityService"
-
+import { useActivityStore } from "../store/ActivityStore"
 
 const initialState: Activity = {
     id: 0,
@@ -12,6 +11,9 @@ const initialState: Activity = {
 }
 
 export default function Form() {
+
+    const { addNewActivity } = useActivityStore()
+
     const [activity, setActivity] = useState<Activity>(initialState)
     
     const handleChange = (e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
@@ -30,12 +32,9 @@ export default function Form() {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+    
         try {
-            const savedActivity = await addActivity(activity); // Espera la respuesta de la API con el ID
-            
-            console.log("Datos guardados en la API: ", savedActivity); // Verifica los datos que devuelve la API
-            
+            await addNewActivity(activity);
             setActivity({
                 ...initialState,
                 category: 1,

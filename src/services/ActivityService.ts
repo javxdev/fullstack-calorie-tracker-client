@@ -24,7 +24,7 @@ export const addActivity = async (activity: Activity) => {
         
         if (result.success) {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/activities`, result.data);
-            return response.data; // Devolvemos la actividad completa, incluyendo el ID generado
+            return response.data
         }
     } catch (error) {
         throw error;
