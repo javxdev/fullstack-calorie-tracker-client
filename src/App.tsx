@@ -2,34 +2,20 @@ import { useEffect, useMemo } from "react";
 import Form from "./components/Form";
 import ActivityList from "./components/ActivityList";
 import CalorieTracker from "./components/CalorieTracker";
-import useActivity from "./hooks/useActivity";
-import { getActivities } from "./services/ActivityService";
-import { Activity } from "./types";
+import { useActivityStore } from "./store/ActivityStore";
 
 function App() {
 
-  const { state, dispatch } = useActivity()
+  const { activities, fetchActivities } = useActivityStore()
 
   useEffect(() => {
-    async function fetchActivities() {
-      try {
-        const activities = await getActivities() as Activity[];
-        dispatch({type: "fetch-activities", payload: { activities }})
-      } catch (error) {
-        console.error('Error fetching activities:', error);
-      }
+    async function fetchData() {
+      await fetchActivities();
     }
-
-    fetchActivities();
+    fetchData();
   }, []);
 
-  console.log(state)
-
-  useEffect(() => {
-    localStorage.setItem('activities', JSON.stringify(state.activities))
-  },[state.activities])
-
-  const canRestartApp = () => useMemo(() => state.activities.length, [state.activities])
+  const canRestartApp = () => useMemo(() => activities.length, [activities]) 
     
   return (
     <>
@@ -39,7 +25,7 @@ function App() {
           <button 
             className="px-6 py-3 bg-black text-white uppercase font-bold rounded-md disabled:opacity-10"
             disabled={!canRestartApp()}
-            onClick={() => dispatch({type: 'restart-app'})}>
+            onClick={() => {}}>
               Restart App
             </button>
         </div>

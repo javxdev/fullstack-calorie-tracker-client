@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react"
 import { Activity } from "../types"
 import { categories } from "../data/categories"
-import useActivity from "../hooks/useActivity"
+import { addActivity } from "../services/ActivityService"
 
 
 const initialState: Activity = {
@@ -12,7 +12,6 @@ const initialState: Activity = {
 }
 
 export default function Form() {
-    // const { state, dispatch } = useActivity()
     const [activity, setActivity] = useState<Activity>(initialState)
     
     const handleChange = (e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
@@ -29,18 +28,24 @@ export default function Form() {
         return name.trim() !== '' && calories > 0
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         
-        // dispatch({type: 'save-activity', payload: {newActivity: activity}})
-
-        setActivity({
-            ...initialState,
-            category: 1,
-            name: '',
-            calories: 0
-        })
-    }
+        try {
+            const savedActivity = await addActivity(activity); // Espera la respuesta de la API con el ID
+            
+            console.log("Datos guardados en la API: ", savedActivity); // Verifica los datos que devuelve la API
+            
+            setActivity({
+                ...initialState,
+                category: 1,
+                name: '',
+                calories: 0
+            });
+        } catch (error) {
+            console.error("Error saving activity:", error);
+        }
+    };
     
   return (
     <form

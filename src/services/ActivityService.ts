@@ -1,6 +1,6 @@
 import axios from "axios"
 import {  ActivitiesSchema, Activity } from "../types"
-import { ActivitySchema } from "../types";
+import { ActivityWithoutIdSchema } from "../types";
 
 export const getActivities = async () => {
     try {
@@ -14,17 +14,22 @@ export const getActivities = async () => {
     }
 };
 
-export const addActivity = async (data: Activity) => {
+export const addActivity = async (activity: Activity) => {
     try {
-        const result = ActivitySchema.safeParse(data)
-        if(result.success){
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/activities`, result.data);
+        const result = ActivityWithoutIdSchema.safeParse({
+            category: activity.category,
+            name: activity.name,
+            calories: activity.calories
+        });
+        
+        if (result.success) {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/activities`, result.data);
+            return response.data; // Devolvemos la actividad completa, incluyendo el ID generado
         }
     } catch (error) {
         throw error;
     }
 };
-
 
 export const deleteActivity = async (id: Activity['id']) => {
     try {
