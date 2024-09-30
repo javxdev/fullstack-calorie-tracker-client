@@ -16,7 +16,7 @@ function App() {
       await fetchActivities();
     }
     fetchData();
-  }, []);
+  }, [activities]);
 
   const canRestartApp = () => useMemo(() => activities.length, [activities]) 
     

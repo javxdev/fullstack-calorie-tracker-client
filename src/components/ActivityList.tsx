@@ -3,6 +3,7 @@ import { categories } from "../data/categories"
 import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { useActivityStore } from "../store/ActivityStore"
+import { deleteActivity } from "../services/ActivityService"
 
 export default function ActivityList() {
 
@@ -48,7 +49,7 @@ export default function ActivityList() {
                     <button>
                         <XCircleIcon
                             className="size-10 text-red-800 hover:text-red-700"
-                            onClick={() => {}}
+                            onClick={async () => await deleteActivity(activity.id)}
                         />
                     </button>
                 </div>

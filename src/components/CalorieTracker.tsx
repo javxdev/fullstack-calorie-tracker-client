@@ -10,7 +10,7 @@ export default function CalorieTracker() {
   
   const caloriesBurned = useMemo(() => activities.reduce((total, activity) => activity.category === 2 ? total - activity.calories : total, 0), [activities])
   
-  const netCalories = useMemo(() => caloriesBurned - caloriesConsumed  , [activities])
+  const netCalories = useMemo(() => caloriesBurned + caloriesConsumed  , [activities])
 
   return (
     <>
