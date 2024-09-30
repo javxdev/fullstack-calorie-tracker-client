@@ -27,7 +27,7 @@ export default function Form() {
 
     const isValidActivity = () => {
         const { name, calories } = activity
-        return name.trim() !== '' && calories > 0
+        return name.trim() !== '' && calories > 0 && !Number(name)
     }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -48,13 +48,13 @@ export default function Form() {
     
   return (
     <form
-        className="space-y-5 bg-white shadow p-10 rounded-md"
+        className="space-y-5 bg-gray-800 shadow p-10 rounded-md"
         onSubmit={handleSubmit}
     >
         <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="category" className="font-bold">Category</label>
+            <label htmlFor="category" className="font-bold text-gray-200">Category</label>
             <select 
-                className="border border-slate-300 p-2 rounded-md w-full bg-white"
+                className="border border-slate-600 p-2 rounded-md w-full text-white appearance-auto bg-gray-800"
                 id="category"
                 value={activity.category}
                 onChange={handleChange}
@@ -71,11 +71,11 @@ export default function Form() {
         </div>
 
         <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="name" className="font-bold">Activity</label>
+            <label htmlFor="name" className="font-bold text-gray-200">Activity</label>
             <input 
                 id="name"
                 type="text"
-                className="border border-slate-300 p-2 rounded-md"
+                className="border border-slate-600 p-2 rounded-md bg-gray-800 text-gray-200"
                 placeholder="Ej. Food, Orange Juice, Work Out, Salad, etc..."
                 value={activity.name}
                 onChange={handleChange}
@@ -83,11 +83,11 @@ export default function Form() {
         </div>
 
         <div className="grid grid-cols-1 gap-3">
-            <label htmlFor="calories" className="font-bold">Calories</label>
+            <label htmlFor="calories" className="font-bold text-gray-200">Calories</label>
             <input 
                 type="number"
                 id="calories"
-                className="border border-slate-300 p-2 rounded-md"
+                className="border border-slate-600 p-2 rounded-md bg-gray-800 text-gray-200"
                 placeholder="Like 300 or 700"
                 value={activity.calories}
                 onChange={handleChange}
@@ -96,7 +96,7 @@ export default function Form() {
 
         <input
             type="submit"
-            className="bg-gray-800 hover:bg-gray-700 text-white w-full p-4 font-bold uppercase cursor-pointer disabled:opacity-10"
+            className="bg-gray-900 hover:bg-gray-700 text-white w-full p-4 font-bold uppercase cursor-pointer disabled:opacity-10"
             value={activity.category === 1 ? 'Save Food' : 'Save Work Out'}
             disabled={!isValidActivity()}
         />

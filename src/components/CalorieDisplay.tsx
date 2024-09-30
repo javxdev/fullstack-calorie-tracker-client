@@ -6,7 +6,7 @@ type CalorieDisplayProps = {
 export default function CalorieDisplay({calories, text} : CalorieDisplayProps) {
   return (
     <p className="text-white font-bold rounded-full grid grid-cols-1 gap-3 text-center">
-        <span className="font-black text-6xl text-orange">{calories}</span>
+        <span className={`font-black text-6xl text-orange ${calories > 0 ? 'text-green-700' : 'text-red-800'}`}>{calories}</span>
         {text}
     </p>
   )

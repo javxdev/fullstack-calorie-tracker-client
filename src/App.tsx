@@ -4,6 +4,9 @@ import ActivityList from "./components/ActivityList";
 import CalorieTracker from "./components/CalorieTracker";
 import { useActivityStore } from "./store/ActivityStore";
 
+
+// add CalorieTracker styles
+
 function App() {
 
   const { activities, fetchActivities } = useActivityStore()
@@ -23,7 +26,7 @@ function App() {
         <div className="max-w-3xl mx-auto flex justify-between items-center">
           <h1 className="text-white uppercase font-bold text-2xl">Calorie Tracker</h1>
           <button 
-            className="px-6 py-3 bg-black text-white uppercase font-bold rounded-md disabled:opacity-10"
+            className="px-6 py-3 border border-gray-500 transition-all ease-linear hover:bg-gray-700 text-white uppercase font-bold rounded-md disabled:opacity-10"
             disabled={!canRestartApp()}
             onClick={() => {}}>
               Restart App
@@ -43,7 +46,7 @@ function App() {
           </div>
       </section>
 
-      <section className="mx-auto bg-gray-200 p-10">
+      <section className="mx-auto bg-gray-700 p-10">
         <div className=" mx-auto max-w-3xl">
           <ActivityList/>
         </div>
