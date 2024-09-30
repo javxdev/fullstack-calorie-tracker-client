@@ -3,11 +3,10 @@ import { categories } from "../data/categories"
 import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { useActivityStore } from "../store/ActivityStore"
-import { deleteActivity } from "../services/ActivityService"
 
 export default function ActivityList() {
 
-    const { activities } = useActivityStore()
+    const { activities, deleteActivity } = useActivityStore()
   
     const categoryName = useMemo(() => 
         (category: Activity['category']) =>
@@ -49,7 +48,7 @@ export default function ActivityList() {
                     <button>
                         <XCircleIcon
                             className="size-10 text-red-800 hover:text-red-700"
-                            onClick={async () => await deleteActivity(activity.id)}
+                            onClick={ async () => await deleteActivity(activity.id)}
                         />
                     </button>
                 </div>

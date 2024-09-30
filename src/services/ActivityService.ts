@@ -33,7 +33,8 @@ export const addActivity = async (activity: Activity) => {
 
 export const deleteActivity = async (id: Activity['id']) => {
     try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/api/activities/${id}`);
+        const url = `${import.meta.env.VITE_API_URL}/api/activities/${id}`
+        await axios.delete(url);
     } catch (error) {
         throw error;
     }
