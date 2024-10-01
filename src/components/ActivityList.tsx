@@ -6,7 +6,7 @@ import { useActivityStore } from "../store/ActivityStore"
 
 export default function ActivityList() {
 
-    const { activities, deleteActivity } = useActivityStore()
+    const { activities, updateActivity, deleteActivity } = useActivityStore()
   
     const categoryName = useMemo(() => 
         (category: Activity['category']) =>
@@ -41,7 +41,7 @@ export default function ActivityList() {
                     <button>
                         <PencilSquareIcon
                             className="size-10 text-gray-400 hover:text-gray-300"
-                            onClick={() => {}}
+                            onClick={ async () => await updateActivity(activity)}
                         />
                     </button>
 

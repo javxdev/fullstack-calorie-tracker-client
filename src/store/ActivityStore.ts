@@ -8,6 +8,7 @@ type ActivityStore = {
     activeId: Activity['id'],
     fetchActivities: () => Promise<void>,
     addNewActivity: (newActivity: Activity) => Promise<void>,
+    updateActivity: (activity: Activity) => Promise<void>,
     deleteActivity: (id: Activity['id']) => Promise<void>
 }
 
@@ -29,6 +30,9 @@ export const useActivityStore = create<ActivityStore>()(
                     activities: updatedActivities,
                     activeId: 0
                 }));
+            },
+            updateActivity: async (activity: Activity) => {
+                console.log(activity)
             },
             deleteActivity: async (id: Activity['id']) => {
                 await deleteActivity(id)
