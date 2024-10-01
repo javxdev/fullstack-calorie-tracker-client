@@ -31,6 +31,20 @@ export const addActivity = async (activity: Activity) => {
     }
 };
 
+export const updateActivity = async (id: Activity['id'], activity: Activity) => {
+    try {
+            const url = `${import.meta.env.VITE_API_URL}/api/activities/${id}`
+            await axios.put(url, 
+            {
+                category: +activity.category,
+                name: activity.name,
+                calories: +activity.calories
+            })
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const deleteActivity = async (id: Activity['id']) => {
     try {
         const url = `${import.meta.env.VITE_API_URL}/api/activities/${id}`

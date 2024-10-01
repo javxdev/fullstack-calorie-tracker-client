@@ -1,14 +1,15 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { addActivity, deleteActivity, getActivities } from "../services/ActivityService";
+import { addActivity, deleteActivity, getActivities, updateActivity } from "../services/ActivityService";
 import { Activity } from "../types";
 
 type ActivityStore = {
     activities: Activity[],
-    activeId: Activity['id'],
+    activeActivity: Activity,
+    setActiveActivity: (activity: Activity) => void,
     fetchActivities: () => Promise<void>,
     addNewActivity: (newActivity: Activity) => Promise<void>,
-    updateActivity: (activity: Activity) => Promise<void>,
+    updateActivityById: (id: Activity['id'], activity: Activity) => Promise<void>,
     deleteActivity: (id: Activity['id']) => Promise<void>
 }
 
@@ -16,7 +17,10 @@ export const useActivityStore = create<ActivityStore>()(
     devtools(
         (set) => ({
             activities: [],
-            activeId: 0,
+            activeActivity: {} as Activity,
+            setActiveActivity: (activity: Activity) => {
+                set({ activeActivity: activity });
+            },
             fetchActivities: async () => {
                 const activities = await getActivities()
                 set(() => ({
@@ -24,16 +28,25 @@ export const useActivityStore = create<ActivityStore>()(
                 }));
             },
             addNewActivity: async (newActivity: Activity) => {
-                await addActivity(newActivity);
+                await addActivity(newActivity)
                 const updatedActivities = await getActivities()
                 set(() => ({
                     activities: updatedActivities,
                     activeId: 0
                 }));
             },
-            updateActivity: async (activity: Activity) => {
-                console.log(activity)
-            },
+            updateActivityById: async (id: Activity['id'], activity: Activity) => {
+                try {
+                    await updateActivity(id, activity);
+                    const updatedActivities = await getActivities();
+                    set(() => ({
+                        activities: updatedActivities,
+                        activeId: 0
+                    }));
+                } catch (error) {
+                    console.error('Error updating activity:', error);
+                }
+            },            
             deleteActivity: async (id: Activity['id']) => {
                 await deleteActivity(id)
                 const updatedActivities = await getActivities()

@@ -6,12 +6,19 @@ import { useActivityStore } from "../store/ActivityStore"
 
 export default function ActivityList() {
 
-    const { activities, updateActivity, deleteActivity } = useActivityStore()
+    const { activities, deleteActivity } = useActivityStore()
   
     const categoryName = useMemo(() => 
         (category: Activity['category']) =>
         categories.map( cat => cat.id === category ? cat.name : '')
         , [activities])
+
+    const { setActiveActivity } = useActivityStore();
+
+    const handleEdit = (activity: Activity) => {
+        setActiveActivity(activity);
+    };
+        
     
     const isEmpty = useMemo(() => activities.length === 0, [activities])
 
@@ -41,7 +48,7 @@ export default function ActivityList() {
                     <button>
                         <PencilSquareIcon
                             className="size-10 text-gray-400 hover:text-gray-300"
-                            onClick={ async () => await updateActivity(activity)}
+                            onClick={() => handleEdit(activity)}
                         />
                     </button>
 
