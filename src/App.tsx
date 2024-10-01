@@ -4,9 +4,6 @@ import ActivityList from "./components/ActivityList";
 import CalorieTracker from "./components/CalorieTracker";
 import { useActivityStore } from "./store/ActivityStore";
 
-
-// add CalorieTracker styles
-
 function App() {
 
   const { activities, fetchActivities } = useActivityStore()
