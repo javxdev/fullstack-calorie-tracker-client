@@ -32,7 +32,7 @@ export const useActivityStore = create<ActivityStore>()(
                 const updatedActivities = await getActivities()
                 set(() => ({
                     activities: updatedActivities,
-                    activeId: 0
+                    activeActivity: {} as Activity
                 }));
             },
             updateActivityById: async (id: Activity['id'], activity: Activity) => {
@@ -41,7 +41,7 @@ export const useActivityStore = create<ActivityStore>()(
                     const updatedActivities = await getActivities();
                     set(() => ({
                         activities: updatedActivities,
-                        activeId: 0
+                        activeActivity: {} as Activity
                     }));
                 } catch (error) {
                     console.error('Error updating activity:', error);

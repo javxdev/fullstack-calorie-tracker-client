@@ -76,24 +76,24 @@ export default function Form() {
 
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="name" className="font-bold text-gray-200">Activity</label>
-                <input
+                <input 
                     id="name"
                     type="text"
                     className="border border-slate-600 p-2 rounded-md bg-gray-800 text-gray-200"
                     placeholder="Ej. Food, Orange Juice, Work Out, Salad, etc..."
-                    value={activity.name}
+                    value={activity.name || ''}
                     onChange={handleChange}
                 />
             </div>
 
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="calories" className="font-bold text-gray-200">Calories</label>
-                <input
+                <input 
                     type="number"
                     id="calories"
                     className="border border-slate-600 p-2 rounded-md bg-gray-800 text-gray-200"
                     placeholder="Like 300 or 700"
-                    value={activity.calories}
+                    value={activity.calories || 0}
                     onChange={handleChange}
                 />
             </div>
@@ -101,7 +101,10 @@ export default function Form() {
             <input
                 type="submit"
                 className="bg-gray-900 hover:bg-gray-700 text-white w-full p-4 font-bold uppercase cursor-pointer disabled:opacity-10"
-                value={activity.id !== 0 ? 'Update Activity' : 'Save Activity'}
+                value={ activity.id !== 0 
+                    ? `Update ${activity.category === 1 ? 'Food' : 'Work Out'}` 
+                    : `Save ${activity.category === 1 ? 'Food' : 'Work Out'}`
+                }
                 disabled={!isValidActivity()}
             />
         </form>
