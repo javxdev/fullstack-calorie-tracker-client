@@ -16,10 +16,13 @@ export default function Form() {
     const [activity, setActivity] = useState<Activity>(initialState);
 
     useEffect(() => {
-        if (activeActivity) {
+        if (activeActivity?.id) {
             setActivity(activeActivity);
+        } else {
+            setActivity(initialState);
         }
     }, [activeActivity]);
+    
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id);

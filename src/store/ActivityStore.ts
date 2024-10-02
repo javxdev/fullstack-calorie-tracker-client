@@ -5,7 +5,7 @@ import { Activity } from "../types";
 
 type ActivityStore = {
     activities: Activity[],
-    activeActivity: Activity,
+    activeActivity: Activity | null,
     setActiveActivity: (activity: Activity) => void,
     fetchActivities: () => Promise<void>,
     addNewActivity: (newActivity: Activity) => Promise<void>,
@@ -17,7 +17,7 @@ export const useActivityStore = create<ActivityStore>()(
     devtools(
         (set) => ({
             activities: [],
-            activeActivity: {} as Activity,
+            activeActivity: null,
             setActiveActivity: (activity: Activity) => {
                 set({ activeActivity: activity });
             },
