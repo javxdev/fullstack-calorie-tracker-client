@@ -60,7 +60,7 @@ export default function Form() {
     };
 
     return (
-        <form className="space-y-5 bg-gray-800 shadow p-10 rounded-md" onSubmit={handleSubmit}>
+        <form className="space-y-5 bg-gray-800 shadow px-3 py-6 md:py-10 md:px-10 rounded-md" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="category" className="font-bold text-gray-200">Category</label>
                 <select

@@ -20,8 +20,8 @@ function App() {
   return (
     <>
       <header className="py-8 bg-gray-800">
-        <div className="max-w-3xl mx-auto flex justify-between items-center">
-          <h1 className="text-white uppercase font-bold text-2xl">Calorie Tracker</h1>
+        <div className="max-w-3xl mx-auto flex justify-between items-center px-2 md:px-0">
+          <h1 className="text-white uppercase font-bold text-2xl ">Calorie Tracker</h1>
           <button 
             className="px-6 py-3 border border-gray-500 transition-all ease-linear hover:bg-gray-700 text-white uppercase font-bold rounded-md disabled:opacity-10"
             disabled={!canRestartApp()}
@@ -43,7 +43,7 @@ function App() {
           </div>
       </section>
 
-      <section className="mx-auto bg-gray-700 p-10">
+      <section className="mx-auto bg-gray-700 p-3 md:p-10">
         <div className=" mx-auto max-w-3xl">
           <ActivityList/>
         </div>
